@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopDemo.Core.Contracts;
 
 namespace ShopDemo.Controllers
 {
@@ -7,14 +8,24 @@ namespace ShopDemo.Controllers
     /// </summary>
     public class ProductController : Controller
     {
+        private readonly IProductService productService;
+
+        public ProductController(IProductService _productService)
+        {
+            productService = _productService;
+        }
+
+
         /// <summary>
         /// List all products
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+            var products = await productService.GelAll();
+            ViewData["Title"] = "Products";
+
+            return View(products);
         }
     }
 }

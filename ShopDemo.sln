@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopDemo", "ShopDemo\ShopDemo.csproj", "{80385EF6-BEA1-40D3-9A17-9AEA1B39D1FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopDemo", "ShopDemo\ShopDemo.csproj", "{80385EF6-BEA1-40D3-9A17-9AEA1B39D1FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopDemo.Core", "ShopDemo.Core\ShopDemo.Core.csproj", "{E82222AF-B151-495D-98CC-071676912D80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopDemo.Core", "ShopDemo.Core\ShopDemo.Core.csproj", "{E82222AF-B151-495D-98CC-071676912D80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopDemo.Api", "ShopDemo.Api\ShopDemo.Api.csproj", "{BC896C0C-0419-4647-8EEF-C1BA58420566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopDemo.Api", "ShopDemo.Api\ShopDemo.Api.csproj", "{BC896C0C-0419-4647-8EEF-C1BA58420566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopDemo.Grpc", "ShopDemo.Grpc\ShopDemo.Grpc.csproj", "{BCFD1009-52EF-4B5A-B665-80199A537000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopDemo.Grpc", "ShopDemo.Grpc\ShopDemo.Grpc.csproj", "{BCFD1009-52EF-4B5A-B665-80199A537000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

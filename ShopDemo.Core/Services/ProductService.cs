@@ -27,7 +27,8 @@ namespace ShopDemo.Core.Services
         /// <returns>List of products</returns>
         public async Task<IEnumerable<ProductDto>> GelAll()
         {
-            string data = await File.ReadAllTextAsync("Data/products.json");
+            string dataPath = config.GetSection("DataFiles:Products").Value;
+            string data = await File.ReadAllTextAsync(dataPath);
 
             return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(data);
 
