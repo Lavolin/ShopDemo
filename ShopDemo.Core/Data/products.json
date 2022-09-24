@@ -1,0 +1,32 @@
+[
+  {
+    "id": "2073c415-3f2c-480f-862e-2562c78c76a7",
+    "name": "Salt",
+    "price": "1",
+    "quantity": 50
+  },
+  {
+    "id": "0f42bb5c-fda2-4e06-ba5a-21c451259b81",
+    "name": "Sugar",
+    "price": "2",
+    "quantity": 60
+  },
+  {
+    "id": "0f4a31e9-d7ea-4794-88c1-0a3021ce4a83",
+    "name": "Tomato",
+    "price": "4",
+    "quantity": 150
+  },
+  {
+    "id": "ecdf86c9-4acf-4793-a37f-622694d163c3",
+    "name": "Shampoo",
+    "price": "5",
+    "quantity": 140
+  },
+  {
+    "id": "cb07e582-bceb-46e4-9431-0434ca6cc830",
+    "name": "Wheat",
+    "price": "0.50",
+    "quantity": 500
+  }
+]
