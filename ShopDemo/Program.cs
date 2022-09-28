@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShopDemo.Core.Contracts;
+using ShopDemo.Core.Data;
 using ShopDemo.Core.Services;
-using ShopDemo.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
