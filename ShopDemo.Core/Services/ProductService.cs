@@ -34,12 +34,13 @@ namespace ShopDemo.Core.Services
         /// <returns>List of products</returns>
         public async Task<IEnumerable<ProductDto>> GelAll()
         {
-            string dataPath = config.GetSection("DataFiles:Products").Value;
-            string data = await File.ReadAllTextAsync(dataPath);
+            //string dataPath = config.GetSection("DataFiles:Products").Value;
+            //string data = await File.ReadAllTextAsync(dataPath);
 
             return await context
                 .Products
                 .AsNoTracking()
+                .Where(p => p.IsActive)
                 .Select(p => new ProductDto()
                 {
                     Id = p.Id,
@@ -71,6 +72,20 @@ namespace ShopDemo.Core.Services
 
             //await repo.AddAsync(product); // with Repository pattern
             //await repo.SaveChangesAsync();
+        }
+
+        public async Task Delete(Guid id)
+        {
+            var product = await context
+                 .Products
+                 .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (product != null)
+            {
+                product.IsActive = false;
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
