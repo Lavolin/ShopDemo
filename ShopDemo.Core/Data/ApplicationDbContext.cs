@@ -11,6 +11,14 @@ namespace ShopDemo.Core.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Product>()
+                .Property(p => p.IsActive)
+                .HasDefaultValue(true);
+
+            base.OnModelCreating(builder);
+        }
         public DbSet<Product> Products { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace ShopDemo.Core.Models
         /// Product price
         /// </summary>
         [Range(typeof(decimal), "0.01", "1000000", ConvertValueInInvariantCulture = true)]
+        [Required]
         public decimal Price { get; set; }
         /// <summary>
         /// Product quantity in stock

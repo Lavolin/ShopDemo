@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using ShopDemo.Core.Contracts;
+using ShopDemo.Core.Data;
+using ShopDemo.Core.Data.Models;
 using ShopDemo.Core.Models;
 using System.Text.Json.Nodes;
 
@@ -12,14 +15,18 @@ namespace ShopDemo.Core.Services
     public class ProductService : IProductService
     {
         private readonly IConfiguration config;
+
+        private readonly ApplicationDbContext context;
         /// <summary>
         /// IoC
         /// </summary>
         /// <param name="_config">Application configuration</param>
-        public ProductService(IConfiguration _config)
+        public ProductService(IConfiguration _config, ApplicationDbContext _context)
         {
             config = _config;
+            context = _context;
         }
+
 
         /// <summary>
         /// Get's all products
@@ -30,9 +37,40 @@ namespace ShopDemo.Core.Services
             string dataPath = config.GetSection("DataFiles:Products").Value;
             string data = await File.ReadAllTextAsync(dataPath);
 
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(data);
+            return await context
+                .Products
+                .AsNoTracking()
+                .Select(p => new ProductDto()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Quantity = p.Quantity
+                }).ToArrayAsync();
+                
 
           // string dataPath = config.GetValue
+        }
+
+        /// <summary>
+        /// Add new product
+        /// </summary>
+        /// <param name="productDto">Product model</param>
+        /// <returns></returns>
+        public async Task Add(ProductDto productDto)
+        {
+            var product = new Product()
+            {
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Quantity = productDto.Quantity
+            };
+
+            await context.AddAsync(product);
+            await context.SaveChangesAsync();
+
+            //await repo.AddAsync(product); // with Repository pattern
+            //await repo.SaveChangesAsync();
         }
     }
 }

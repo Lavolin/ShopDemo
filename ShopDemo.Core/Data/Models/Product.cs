@@ -23,5 +23,8 @@ namespace ShopDemo.Core.Data.Models
         [Comment("Product quantity")]
         public int Quantity { get; set; }
 
+        [Comment("If Product is active")]
+        public bool IsActive { get; set; }
+
     }
 }

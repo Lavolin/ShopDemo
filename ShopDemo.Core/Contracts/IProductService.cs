@@ -12,5 +12,12 @@ namespace ShopDemo.Core.Contracts
         /// </summary>
         /// <returns>List of products</returns>
         Task<IEnumerable<ProductDto>> GelAll();
+
+        /// <summary>
+        /// Add new product
+        /// </summary>
+        /// <param name="productDto">Product model</param>
+        /// <returns></returns>
+        Task Add(ProductDto productDto);
     }
 }
