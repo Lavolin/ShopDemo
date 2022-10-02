@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using ShopDemo.Core.Contracts;
-using ShopDemo.Core.Data;
+using ShopDemo.Core.Data.Common;
 using ShopDemo.Core.Data.Models;
 using ShopDemo.Core.Models;
-using System.Text.Json.Nodes;
 
 namespace ShopDemo.Core.Services
 {
@@ -16,15 +14,15 @@ namespace ShopDemo.Core.Services
     {
         private readonly IConfiguration config;
 
-        private readonly ApplicationDbContext context;
+        private readonly IRepository repo;
         /// <summary>
         /// IoC
         /// </summary>
         /// <param name="_config">Application configuration</param>
-        public ProductService(IConfiguration _config, ApplicationDbContext _context)
+        public ProductService(IConfiguration _config, IRepository _repo)
         {
             config = _config;
-            context = _context;
+            repo = _repo;
         }
 
 
@@ -37,9 +35,7 @@ namespace ShopDemo.Core.Services
             //string dataPath = config.GetSection("DataFiles:Products").Value;
             //string data = await File.ReadAllTextAsync(dataPath);
 
-            return await context
-                .Products
-                .AsNoTracking()
+            return await repo.AllReadonly<Product>()
                 .Where(p => p.IsActive)
                 .Select(p => new ProductDto()
                 {
@@ -48,9 +44,6 @@ namespace ShopDemo.Core.Services
                     Price = p.Price,
                     Quantity = p.Quantity
                 }).ToArrayAsync();
-                
-
-          // string dataPath = config.GetValue
         }
 
         /// <summary>
@@ -67,24 +60,21 @@ namespace ShopDemo.Core.Services
                 Quantity = productDto.Quantity
             };
 
-            await context.AddAsync(product);
-            await context.SaveChangesAsync();
+            await repo.AddAsync(product);
+            await repo.SaveChangesAsync();
 
-            //await repo.AddAsync(product); // with Repository pattern
-            //await repo.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
-            var product = await context
-                 .Products
+            var product = await repo.AllReadonly<Product>()
                  .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product != null)
             {
                 product.IsActive = false;
 
-                await context.SaveChangesAsync();
+                await repo.SaveChangesAsync();
             }
         }
     }
