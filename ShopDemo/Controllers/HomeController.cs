@@ -15,6 +15,15 @@ namespace ShopDemo.Controllers
 
         public IActionResult Index()
         {
+            if (TempData.ContainsKey("LastAccessTime"))
+            {
+                return Ok(TempData["LastAccessTime"]);
+            }
+
+            TempData["LastAccessTime"] = DateTime.Now;
+
+            this.HttpContext.Response.Cookies.Append("ToshkoCookie", "Todor");
+
             return View();
         }
 
