@@ -15,20 +15,29 @@ namespace ShopDemo.Controllers
 
         public IActionResult Index()
         {
-            if (TempData.ContainsKey("LastAccessTime"))
-            {
-                return Ok(TempData["LastAccessTime"]);
-            }
+            //if (TempData.ContainsKey("LastAccessTime"))
+            //{
+            //    return Ok(TempData["LastAccessTime"]);
+            //}
 
-            TempData["LastAccessTime"] = DateTime.Now;
+            //TempData["LastAccessTime"] = DateTime.Now;
 
-            this.HttpContext.Response.Cookies.Append("ToshkoCookie", "Todor");
+            //this.HttpContext.Response.Cookies.Append("ToshkoCookie", "Todor");
+
+            this.HttpContext.Session.SetString("name", "Toshko");
 
             return View();
         }
 
         public IActionResult Privacy()
         {
+           string? name = this.HttpContext.Session.GetString("name");
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                return Ok(name);
+            }
+            
             return View();
         }
 
