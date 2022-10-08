@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopDemo.Core.Contracts;
 using ShopDemo.Core.Data;
 using ShopDemo.Core.Data.Common;
+using ShopDemo.Core.Data.Models.Account;
 using ShopDemo.Core.Services;
 
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => 
 {
     options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireNonAlphanumeric = true;
