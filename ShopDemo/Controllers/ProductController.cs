@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopDemo.Core.Contracts;
 using ShopDemo.Core.Models;
 
@@ -7,6 +8,7 @@ namespace ShopDemo.Controllers
     /// <summary>
     /// Web shop products
     /// </summary>
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService productService;
