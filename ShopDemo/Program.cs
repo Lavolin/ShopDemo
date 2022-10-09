@@ -23,8 +23,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequiredLength = 6;
     options.User.RequireUniqueEmail = true;
 })
-
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+});
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IProductService, ProductService>();
