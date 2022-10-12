@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopDemo.Models;
 using System.Diagnostics;
 
 namespace ShopDemo.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -13,6 +14,7 @@ namespace ShopDemo.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             //if (TempData.ContainsKey("LastAccessTime"))
@@ -24,23 +26,20 @@ namespace ShopDemo.Controllers
 
             //this.HttpContext.Response.Cookies.Append("ToshkoCookie", "Todor");
 
-            this.HttpContext.Session.SetString("name", "Toshko");
+           // this.HttpContext.Session.SetString("name", "Toshko");
 
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
-           string? name = this.HttpContext.Session.GetString("name");
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                return Ok(name);
-            }
+           
             
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
