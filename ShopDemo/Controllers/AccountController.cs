@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ShopDemo.Core.Constants;
 using ShopDemo.Core.Data.Models.Account;
 using ShopDemo.Models;
 
@@ -48,6 +49,9 @@ namespace ShopDemo.Controllers
 
             var result = await userManager.CreateAsync(user, model.Password);
 
+           await userManager.
+                AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName ?? user.Email));
+
             if (result.Succeeded)
             {
                 await signInManager.SignInAsync(user, isPersistent: false);
@@ -88,7 +92,9 @@ namespace ShopDemo.Controllers
 
             if (user != null)
             {
-              var result =  await signInManager.PasswordSignInAsync(user, model.Password, false, false);
+                await userManager.
+                AddClaimAsync(user, new System.Security.Claims.Claim(ClaimTypeConstants.FirstName, user.FirstName ?? user.Email));
+                var result =  await signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
                 if (result.Succeeded)
                 {

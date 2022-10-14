@@ -22,6 +22,7 @@ namespace ShopDemo.Controllers
         /// List all products
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var products = await productService.GelAll();
