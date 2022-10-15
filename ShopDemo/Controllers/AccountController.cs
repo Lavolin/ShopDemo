@@ -11,13 +11,16 @@ namespace ShopDemo.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> _userManager,
-            SignInManager<ApplicationUser> _signInManager)
+            SignInManager<ApplicationUser> _signInManager,
+            RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
+            roleManager = _roleManager;
         }
 
         [HttpGet]
@@ -118,5 +121,21 @@ namespace ShopDemo.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> CreateRoles()
+        {
+           await roleManager.CreateAsync(new IdentityRole(RoleConstants.Manager));
+           await roleManager.CreateAsync(new IdentityRole(RoleConstants.Supervisor));
+           await roleManager.CreateAsync(new IdentityRole(RoleConstants.Administrator));
+
+            return RedirectToAction("Index", "Home");            
+        }
+
+        public async Task<IActionResult> AddUserRole()
+        {
+            string email1 = "heni@abv.bg";
+            string email2 = "eli@abv.bg";
+        }
+
     }
 }
