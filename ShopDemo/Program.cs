@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ShopDemo.Core.Constants;
 using ShopDemo.Core.Contracts;
 using ShopDemo.Core.Data;
 using ShopDemo.Core.Data.Common;
@@ -29,6 +30,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanDeleteProduct", policy =>
+    policy.RequireAssertion(context =>
+    context.User.IsInRole(RoleConstants.Manager) && context.User.IsInRole(RoleConstants.Supervisor)));
 });
 
 builder.Services.AddControllersWithViews();

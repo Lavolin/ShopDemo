@@ -21,9 +21,9 @@
                 <td>@item.Quantity</td>
                 <td><button class="btn btn-success">Buy</button></td>
                 <td>
-                    <form asp-controller="Product" asp-action="Delete" method="post">
+                    <form asp-action="Delete" asp-controller="Product"  method="post">
                         <input name="id" type="hidden" value="@item.Id"/>
-                    <button class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger" @(User.IsInRole("Supervisor") ? "" : "diasabled")>Delete</button>
                     </form>
                 </td>
             </tr>

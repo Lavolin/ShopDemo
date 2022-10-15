@@ -135,6 +135,14 @@ namespace ShopDemo.Controllers
         {
             string email1 = "heni@abv.bg";
             string email2 = "eli@abv.bg";
+
+            var user1 = await userManager.FindByEmailAsync(email1);
+            var user2 = await userManager.FindByEmailAsync(email2);
+
+            await userManager.AddToRoleAsync(user1, RoleConstants.Manager);
+            await userManager.AddToRolesAsync(user2, new[] {RoleConstants.Manager, RoleConstants.Supervisor});
+
+            return RedirectToAction("Index", "Home");
         }
 
     }

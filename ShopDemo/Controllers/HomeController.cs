@@ -26,7 +26,7 @@ namespace ShopDemo.Controllers
 
             //this.HttpContext.Response.Cookies.Append("ToshkoCookie", "Todor");
 
-           this.HttpContext.Session.SetString("name", "Toshko");
+           //this.HttpContext.Session.SetString("name", "Toshko");
 
             return View();
         }

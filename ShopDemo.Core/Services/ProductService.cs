@@ -67,7 +67,7 @@ namespace ShopDemo.Core.Services
 
         public async Task Delete(Guid id)
         {
-            var product = await repo.AllReadonly<Product>()
+            var product = await repo.All<Product>()
                  .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product != null)

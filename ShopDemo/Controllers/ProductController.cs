@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShopDemo.Core.Constants;
 using ShopDemo.Core.Contracts;
 using ShopDemo.Core.Models;
 
@@ -32,6 +33,7 @@ namespace ShopDemo.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = $"{RoleConstants.Manager}, {RoleConstants.Supervisor}")]
         public IActionResult Add()
         {
             var model = new ProductDto();
@@ -41,6 +43,7 @@ namespace ShopDemo.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = $"{RoleConstants.Manager}, {RoleConstants.Supervisor}")]
         public async Task<IActionResult> Add(ProductDto model)
         {
             ViewData["Title"] = "Add new Product";
@@ -55,6 +58,7 @@ namespace ShopDemo.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "CanDeleteProduct")]
         public async Task<IActionResult> Delete(Guid id)
         {
             await productService.Delete(id);
